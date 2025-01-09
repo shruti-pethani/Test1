@@ -13,7 +13,7 @@ test('Filter even numbers in an empty array', () => {
 });
 
 test('Filter even numbers in an array with no even numbers', () => {
-  const numbers = [1, 3, 5, 7, 9];
+  const numbers = [1, 3, 5, 7, 9, 11];
   const filteredNumbers = filterEvenNumbers(numbers);
   expect(filteredNumbers).toEqual([]);
 });
