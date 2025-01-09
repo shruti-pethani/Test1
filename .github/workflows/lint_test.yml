@@ -1,0 +1,49 @@
+name: Lint, Format, and Test Code
+
+on:
+  push:
+    branches:
+      - main
+      - 'dev/*' 
+  pull_request:
+    branches:
+      - main
+      - 'dev/*'
+
+jobs:
+  lint-code:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20'
+
+    - name: Install dependencies
+      run: npm install
+    
+    - name: Run ESLint
+      run: npx eslint --fix
+
+  run-tests:
+    runs-on: ubuntu-latest
+    needs: lint-code 
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20'
+
+    - name: Install dependencies
+      run: npm install
+    
+    - name: Run Jest Tests
+      run: npm test
