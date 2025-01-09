@@ -1,0 +1,32 @@
+name: Lint and Format Code
+
+on:
+  push:
+    branches:
+      - main
+      - 'dev/*'  # Include additional branches if you need
+  pull_request:
+    branches:
+      - main
+      - 'dev/*'
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'  # Specify the Node.js version to use
+
+    - name: Install dependencies
+      run: |
+        npm install
+
+    - name: Run ESLint
+      run: |
+        npx eslint . --ext .js,.jsx,.ts,.tsx --fix
